@@ -45,11 +45,25 @@ Furthermore, I integrated a feature that allows me, as an administrator, to dele
 
      ![profiles](testing-images/profiles-logged-out.png)
 
-4. **Posts Endpoints**
-   - api/posts/
-     - Test Scenarios and Expected Results
+### Posts Endpoints
+- api/posts/
+     - Test Scenarios 
+    
+    - when user is logged out.
+     ![posts](testing-images/postlist-logged-out.png)
+
+    - when user is logged in 
+     ![profiles](testing-images/postlist-logged-in.png)
+
    - api/posts/id/
      - Test Scenarios and Expected Results
+     This worked as intended.
+     When I attempt to enter an images that was more then 2MB, it didnt work, and i succesfully created a post with the crrecr size images. This can be seen below.
+
+   - created a post 
+     ![profiles](testing-images/postlist-add-post.png)
+   - images size too big 
+     ![profiles](testing-images/postlist-bigimage.png)
 
 
 5. **Comments Endpoints**
