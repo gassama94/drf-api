@@ -65,6 +65,13 @@ Furthermore, I integrated a feature that allows me, as an administrator, to dele
    - images size too big 
      ![profiles](testing-images/postlist-bigimage.png)
 
+   - api/postsdetails/id/
+   - updated a post 
+     ![profiles](testing-images/postdeatail-updated.png)
+
+   - deleted post 
+     ![profiles](testing-images/postdetail-delete.png)
+
 
 5. **Comments Endpoints**
    - api/comments/
