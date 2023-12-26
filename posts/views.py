@@ -1,5 +1,7 @@
 # Import necessary modules and classes from Django REST framework and custom permissions
-from rest_framework import generics, permissions
+from django.db.models import Count
+from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
@@ -12,7 +14,40 @@ class PostList(generics.ListCreateAPIView):
     """
     serializer_class = PostSerializer  # Specifies the serializer to use for formatting request/response data
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # Permissions - allow any read actions but restrict write actions to authenticated users
-    queryset = Post.objects.all()  # The queryset representing the database query to be executed for posts
+
+    # Using Django's annotate to add additional fields to the queryset.
+    # These annotations are used to count related objects.
+    queryset = Post.objects.annotate(
+    # Counting the number of likes related to the object, ensuring each like is counted only once.
+    likes_count=Count('likes', distinct=True),
+    # Counting the number of comments related to the object, also ensuring distinct counting.
+    comments_count=Count('comment', distinct=True)
+    ).order_by('-created_at')  # Ordering the results by the creation date of the main object, newest first.
+
+    # Setting up filter backends to allow dynamic ordering of the queryset in the API.
+    filter_backends = [
+        filters.OrderingFilter,  # Using Django REST framework's OrderingFilter.
+        filters.SearchFilter,   # Using Django REST framework's SearchFilter.
+        DjangoFilterBackend,
+    ]
+
+    filterset_fields = [
+        'owner__followed__owner__profile',
+        'likes__owner__profile',
+        'owner__profile',
+    ]
+
+    search_fields = [
+        'owner__username',
+        'title',
+    ]
+
+    # Specifying the fields that can be used for ordering in API requests.
+    ordering_fields = [
+    'likes_count',          # Allowing ordering by the count of likes.
+    'comments_count',       # Allowing ordering by the count of comments.
+    'likes__created_at',    # Allowing ordering by the creation date of likes.
+    ]
 
     def perform_create(self, serializer):
         """
@@ -28,4 +63,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     serializer_class = PostSerializer  # Specifies the serializer for post data
     permission_classes = [IsOwnerOrReadOnly]  # Custom permission - allows operations only if the user is the owner of the post
-    queryset = Post.objects.all()  # The queryset for retrieving the post from the database
+    queryset = Post.objects.annotate(
+        likes_count=Count('likes', distinct=True),
+        comments_count=Count('comment', distinct=True)
+    ).order_by('-created_at')
