@@ -61,23 +61,34 @@ Furthermore, I integrated a feature that allows me, as an administrator, to dele
      When I attempt to enter an images that was more then 2MB, it didnt work, and i succesfully created a post with the crrecr size images. This can be seen below.
 
    - created a post 
-     ![profiles](testing-images/postlist-add-post.png)
+     ![posts](testing-images/postlist-add-post.png)
    - images size too big 
-     ![profiles](testing-images/postlist-bigimage.png)
+     ![posts](testing-images/postlist-bigimage.png)
 
    - api/postsdetails/id/
    - updated a post 
-     ![profiles](testing-images/postdeatail-updated.png)
+     ![posts](testing-images/postdeatail-updated.png)
 
    - deleted post 
-     ![profiles](testing-images/postdetail-delete.png)
+     ![posts](testing-images/postdetail-delete.png)
 
 
-5. **Comments Endpoints**
-   - api/comments/
-     - Test Scenarios and Expected Results
+### Comments Endpoints
+- api/comments/
+     - Test Scenarions.
+     When a user is logged out, they should only be able to view the comment list with this endpoint without the option of posting a comment. The image below shows the GET method working as intended.
+     ![comments](testing-images/comment-loggedout.png)
+
+
+     If a user is authenticated and logged in, however, they should have the added ability to both edit AND delete a comment only if they select the id of a comment that they posted. The image below displays these available options, as well as my attempt to update the current comment to test that the PUT request works as intended.
+     ![comments](testing-images/commentlistdetail-png.png)
+
+     The image below shows the PUT method working successfully with a 200 ok status code.
+     ![comments](testing-images/commentlistdetail-png.png)
    - api/comments/id/
-     - Test Scenarios and Expected Results
+     - Expected Results
+     The image below shows the comment being successfully posted with a 201 status code.
+     ![comments](testing-images/commentsucess.png)
 
 6. **Likes Endpoints**
    - api/likes/
