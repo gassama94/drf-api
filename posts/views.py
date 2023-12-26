@@ -6,6 +6,37 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
 
+
+class CategoryView(generics.ListCreateAPIView):
+    # Use PostSerializer to serialize the data
+    serializer_class = PostSerializer
+
+    # Set permissions for the view:
+    # Authenticated users have full access, while unauthenticated users have read-only access
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    # Define the initial queryset for the list view,
+    # which is all Post objects sorted by creation time
+    queryset = Post.objects.all()
+
+    def post(self, request, format=None):
+        # Extract data from the request
+        data = self.request.data
+
+        # Retrieve the 'category' from the request data
+        category = data['category']
+
+        # Filter the posts by the specified category in a case-insensitive manner,
+        # and order them by the time of creation in descending order
+        queryset = Post.objects.order_by('-created_at').filter(category__iexact=category)
+
+        # Serialize the queryset with PostSerializer, indicating that
+        # the queryset contains multiple items
+        serializer = PostSerializer(queryset, many=True)
+
+        # Return the serialized data in the response
+        return Response(serializer.data)
+
 # PostList class for handling the listing and creation of posts
 class PostList(generics.ListCreateAPIView):
     """
