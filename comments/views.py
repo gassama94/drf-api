@@ -1,5 +1,6 @@
 # Importing necessary classes and functions from Django REST framework and local modules
 from rest_framework import generics, permissions
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Comment
 from .serializers import CommentSerializer, CommentDetailSerializer
@@ -13,6 +14,10 @@ class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer  # Specifies the serializer to use for formatting request/response data
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # Permissions - allow any read actions but restrict write actions to authenticated users
     queryset = Comment.objects.all()  # The queryset that represents the database query to be executed
+
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['post']
+
 
     def perform_create(self, serializer):
         """
