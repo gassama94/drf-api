@@ -57,6 +57,12 @@ class Post(models.Model):
     # The main content of the post, can be left blank
     content = models.TextField(blank=True)
 
+    excerpt = models.TextField(blank=True)
+
+
+
+
+
     # A choice field to categorize the post
     category = models.CharField(max_length=50, choices=Categories.choices,
                                 default=Categories.WORLD)

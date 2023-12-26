@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from posts.models import Post
 from likes.models import Like
+from .models import Categories
+
 
 class PostSerializer(serializers.ModelSerializer):
     # Serializer fields to represent the 'owner' by their username
@@ -15,6 +17,7 @@ class PostSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
+    excerpt = serializers.SerializerMethodField()
 
 
     def validate_image(self, value):
@@ -41,11 +44,19 @@ class PostSerializer(serializers.ModelSerializer):
     def get_like_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
+            # First checks if the user already liked
+            # the post we are trying to retrieve
             like = Like.objects.filter(
                 owner=user, post=obj
             ).first()
+            # Displays the like id of the user that liked
+            # a specific post
             return like.id if like else None
         return None
+
+    def get_excerpt(self, obj):
+        # Generate an excerpt by slicing the content
+        return obj.content[:100] + '...'  # Adjust slice as needed
 
     class Meta:
         # Meta class to specify the model and fields used in the serializer
@@ -54,5 +65,5 @@ class PostSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'title', 'content', 'image', 'image_filter', 
-            'like_id',  'likes_count', 'comments_count',
+            'like_id',  'likes_count', 'comments_count', 'category', 'excerpt',
         ]
