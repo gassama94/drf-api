@@ -90,17 +90,42 @@ Furthermore, I integrated a feature that allows me, as an administrator, to dele
      The image below shows the comment being successfully posted with a 201 status code.
      ![comments](testing-images/commentsucess.png)
 
-6. **Likes Endpoints**
-   - api/likes/
-     - Test Scenarios and Expected Results
+## Likes Endpoints
+- api/likes/
+     - Test Scenarios
+     Users can like post
+     ![likes](testing-images/Likeview.png)
+
+     If a user is logged in and authenticated, however, they should have the option of adding a like on a particular post which can be accessed through a dropdown menu. This can be seen below.
+     ![likes](testing-images/Likeedlist.png)
+
    - api/likes/id/
      - Test Scenarios and Expected Results
+     This endpoint is for a specific like made by a user. If it's a logged-in user, they can also delete a like to represent them 'unliking' a blog post on the front end.
+     ![likes](testing-images/LikeDelete.png)
 
-7. **Followers Endpoints**
-   - api/followers/
-     - Test Scenarios and Expected Results
+     Users are unable to duplicate likes.
+     ![likes](testing-images/likeduplicate.png)
+
+     Logged out Users are unable to like a post.
+     ![likes](testing-images/comment-loggedout.png)
+  
+### Followers Endpoints
+- api/followers/
+     - Test Scenarios
+     A logged-in user should be able to both view the followers list as well as be able to follow other users authenticated on the site. This works as intended and can be seen below.
+     ![followers](testing-images/Followerlist.png)
+     A logged in user should be able to  follower other users.
+     ![followers](testing-images/FollowedList.png.png)
+
+     
    - api/followers/id/
      - Test Scenarios and Expected Results
+     A logged-out user should be able to view a list of all followers and all instances of a user following another user. This works as intended and can be seen below.
+     ![followers](testing-images/Followerloggedout.png)
+
+     A logged-in individual,should also be able to delete a follower instance as you cannot edit it so that a user can stop following a profile. 
+     ![followers](testing-images/followerdelete.png)
 
 
 8. **Categories Endpoints**
