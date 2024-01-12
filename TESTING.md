@@ -1,4 +1,4 @@
-# Hidden wonders API Manual Testing
+# Catch-Up API Manual Testing
 ### Overview of Hidden Wonders API
 
 The Catch-up API is a robust digital platform designed for an interactive blogging community. This API serves as the backbone of a dynamic web application where users can engage with a wide range of content through blog posts, comments, likes, and followers. It's tailored to offer both social interaction and informational content sharing.

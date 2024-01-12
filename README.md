@@ -1,39 +1,80 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Catch-up API: Manual Testing Documentation
 
-Welcome,
+## Overview
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+Catch-up API serves as a robust digital platform designed for an interactive blogging community. It offers a comprehensive suite of features for blog post management, social interactions through comments, likes, and followers, and user profile customization. The API is tailored for content sharing and social engagement, making it ideal for a dynamic blogging application.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
+## Features
 
-## Codeanywhere Reminders
+### Blog Posts Management
+- **Create, View, Edit, and Delete Posts:** Users can actively manage their blog posts, fostering a community of content creators and readers.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+### Comments System
+- **Engage in Discussions:** Users can comment on blog posts, enhancing platform interactivity.
 
-`python3 -m http.server`
+### Likes and Followers
+- **Social Networking:** Enables users to like posts and follow other users, adding a social dimension.
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### Profile Management
+- **Personalization:** Users can create and edit their profiles to add a personal touch to their interactions.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+### Categories System
+- **Organized Navigation:** Posts are categorized for easier discovery and structured browsing.
 
-`http_server`
+## Security and Accessibility
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### User Authentication
+- **Secure Interaction:** Only authenticated users can create and interact with content, ensuring a personalized experience.
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### Administrator Controls
+- **Content Moderation:** Administrators have special privileges for maintaining content quality and appropriateness.
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+## Intended Use
+Catch-up API is designed for a blogging application focused on content creation, sharing, and community interaction, aiming to provide an intuitive and engaging user experience.
 
-To log into the Heroku toolbelt CLI:
+## Methodology for Manual Testing
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+### Approach
+- **Inserting New Data:** Evaluated each endpoint by inserting legitimate and invalid data, observing the response and error handling.
+- **User Authentication Testing:** Confirmed that only authenticated users have permissions to create and interact with posts and profiles.
+- **Administrator Functions:** Tested admin capabilities for deleting inappropriate content.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+### Profiles Endpoint
+- **PUT Method Testing:** Verified that only the profile's owner can update specific details.
 
----
+### Posts Endpoint
+- **Authenticated vs Unauthenticated Access:** Ensured correct permissions for viewing, creating, and interacting with posts.
+- **Image Size Limitation:** Confirmed the functionality of uploading posts with size-limited images.
 
-Happy coding!
+### Comments Endpoint
+- **View vs Post Permissions:** Checked that logged-out users can only view comments, while logged-in users can post, edit, and delete.
+
+### Likes Endpoint
+- **Adding and Removing Likes:** Tested the functionality for authenticated users to like and 'unlike' posts.
+
+### Followers Endpoint
+- **Follow/Unfollow Functionality:** Ensured that logged-in users can follow and unfollow others and view followers list.
+
+### Categories Endpoint
+- **Post Categorization:** Confirmed the ability of users to categorize their posts.
+
+## Conclusion
+
+### Summary of Findings
+- **Effective User Authentication and Access Control**
+- **Seamless Content Management**
+- **Robust Social Interactions**
+- **Customizable User Profiles**
+- **Efficient Content Categorization**
+- **Effective Administrator Controls**
+
+### Recommendations for Improvement
+1. **Improved Error Handling**
+2. **Enhanced Search Functionality**
+3. **Performance Optimization**
+4. **User Interface Enhancements**
+5. **Additional Social Features**
+6. **Accessibility Improvements**
+7. **Regular Updates Based on User Feedback**
+
+In conclusion, the Catch-up API exhibits robust capabilities for a blogging community platform, with potential for further enhancements based on user feedback and technological advancements.
